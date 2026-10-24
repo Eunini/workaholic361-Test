@@ -4,7 +4,7 @@ A recruiting dashboard built with Next.js, React, TypeScript, and SQLite. It lis
 
 ## Setup
 
-Use Node.js 24.x and npm. Or iff you have nvm installed, run `nvm use` to select the version in `.nvmrc`.
+Use Node.js 24.x and npm. Or, if you have nvm installed, run `nvm use` to select the version in `.nvmrc`.
 ```sh
 npm ci
 npm run dev
@@ -23,19 +23,24 @@ Set `DATABASE_PATH` to use a different database file. To reset the default sampl
 ## How it works
 The dashboard fetches candidates from `GET /api/candidates`. Changing a stage sends a `PATCH /api/candidates/:id` request with a JSON body such as `{"stage":"Interview"}`. The four supported stages are Sourced, Screening, Interview, and Hired. Candidates can move in either direction.
 
-The selected stage and summary counts update once the API confirms the save. While saving, that candidate's dropdown is disabled. A failed request shows an error and keeps the previous stage. The list also has loading, retry, and empty states.
+The selected stage and summary counts update once the API confirms the save. While saving, that candidate's dropdown is disabled. Every save shows a notification that slides in at the top right and slides out after a few seconds (hover to keep it open). A failed request shows an error notification and keeps the previous stage. The list also has loading, retry, and empty states.
 
 Search and filtering run in the browser because the dataset is small. API handlers validate stages and candidate IDs; SQLite queries use prepared statements and a stage constraint in the schema. Invalid requests return 400, missing candidates return 404, and storage errors return 500.
 
-SQLite keeps the local setup simple. The app uses Node's built-in `node:sqlite` module, so there is no separate database server or driver to install. Plain CSS handles the layout, and Lucide provides the icons.
+SQLite keeps the local setup simple. The app uses Node's built-in `node:sqlite` module, so there is no separate database server or driver to install. Styling uses CSS Modules next to each component, the Inter font, and Lucide icons.
 
 ## Project structure
 
 - `src/app/api/candidates/` — list and stage-update endpoints.
-- `src/components/` — dashboard state, stage summaries, and candidate table.
+- `src/app/globals.css` — colours, fonts, and base styles.
+- `src/components/layout/` — page shell and sidebar.
+- `src/components/dashboard/` — the dashboard, stage cards, filters, and candidate table.
+- `src/components/toast/` — slide-in notifications (`useToast()`).
+- `src/components/ui/` — small reusable pieces: button, select, avatar, empty state, logo.
+- `src/hooks/use-candidates.ts` — loads candidates and saves stage changes.
+- `src/lib/api.ts` — browser calls to the API.
 - `src/lib/candidates.ts` — candidate types, supported stages, and sample data.
 - `src/lib/db.ts` — database setup and queries.
-- `src/app/globals.css` — desktop and mobile styles.
 - `tests/api.test.ts` — API validation and persistence tests.
 
 ## Checks

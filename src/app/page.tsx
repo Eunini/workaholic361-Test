@@ -1,5 +1,10 @@
-import { TalentDashboard } from "@/components/talent-dashboard";
+import { AppShell } from "@/components/layout/app-shell";
+import { TalentDashboard } from "@/components/dashboard/talent-dashboard";
 
 export default function Home() {
-  return <TalentDashboard />;
+  return (
+    <AppShell>
+      <TalentDashboard />
+    </AppShell>
+  );
 }

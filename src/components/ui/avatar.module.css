@@ -1,0 +1,35 @@
+.avatar {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.avatar[data-tone="0"] {
+  background: #e0e7ff;
+  color: #4338ca;
+}
+
+.avatar[data-tone="1"] {
+  background: #fce7f3;
+  color: #be185d;
+}
+
+.avatar[data-tone="2"] {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.avatar[data-tone="3"] {
+  background: #ffedd5;
+  color: #c2410c;
+}
+
+.avatar[data-tone="4"] {
+  background: #e0f2fe;
+  color: #0369a1;
+}
