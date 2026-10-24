@@ -20,6 +20,14 @@ npm start
 
 Set `DATABASE_PATH` to use a different database file. To reset the default sample data, stop the server and delete the `data/` directory.
 
+## Technologies used
+
+- Next.js 16 (App Router and route handlers)
+- React 19 and TypeScript
+- SQLite through Node's built-in `node:sqlite` module
+- CSS Modules, the Inter font, and Lucide icons
+- Node's test runner with `tsx` for API tests, and ESLint
+
 ## How it works
 The dashboard fetches candidates from `GET /api/candidates`. Changing a stage sends a `PATCH /api/candidates/:id` request with a JSON body such as `{"stage":"Interview"}`. The four supported stages are Sourced, Screening, Interview, and Hired. Candidates can move in either direction.
 
@@ -61,6 +69,6 @@ The tests use a temporary database. They cover seeding, valid stage updates, per
 - Separate users can overwrite each other's stage updates. Changes from another browser appear after a reload.
 - SQLite queries are synchronous; this is suitable for the small dataset but would need revisiting at a larger scale. Some Node 24 releases print an experimental SQLite warning.
 
-## Next steps
+## What I'd improve with more time
 
 Add recruiter authentication, candidate creation and detail views, and a history of stage changes. For a shared deployment, add conflict detection for simultaneous updates and move to PostgreSQL. Larger candidate lists would also need server-side search and pagination. Browser tests in CI would cover the complete recruiter flow.
